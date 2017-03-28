@@ -23,7 +23,99 @@
 #ifndef INCLUDE_HCDNN_H_
 #define INCLUDE_HCDNN_H_
 
-// 
+typedef enum {
+  HCDNN_STATUS_SUCCESS = 0,
+  HCDNN_STATUS_ERROR
+} hcdnnStatus_t; 
+
+typedef enum {
+  HCDNN_FLOAT = 0,
+  HCDNN_DOUBLE
+} hcdnnDataType_t;
+
+typedef struct {
+  int n_;
+  int c_;
+  int h_;
+  int w_;
+  hcdnnDataType_t data_type_;
+} hcdnn4DTensorStruct_t;
+
+typedef hcdnn4DTensorDesc_t hcdnn4DTensorStruct_t *;
+
+typedef struct {
+  int pad_h_;
+  int pad_w_;
+  int u_;
+  int v_;
+  int upscale_x_;
+  int upscale_y_;
+} hcdnnConvolutionStruct_t;
+
+typedef hcdnnConvolutionDesc_t hcdnnConvolutionStruct_t *;
+
+typedef struct {
+  int k_;
+  int c_;
+  int h_;
+  int w_;
+  hcdnnDataType_t data_type_;
+} hcdnnConvKernelStruct_t;
+
+typedef hcdnnConvKernelDesc_t hcdnnConvKernelStruct_t *;
+
+hcdnnStatus_t
+hcdnnCreate4DTensor(hcdnn4DTensorDesc_t *tensor_desc);
+
+hcdnnStatus_t
+hcdnnSet4DTensor(hcdnn4DTensorDesc_t tensor_desc,
+                 int n,
+                 int c,
+                 int h,
+                 int w,
+                 hcdnnDataType_t data_type);
+
+hcdnnStatus_t
+hcdnnDestroy4DTensor(hcdnn4DTensorDesc_t tensor_desc);
+
+hcdnnStatus_t
+hcdnnCreateConvolutionDescriptor(hcdnnConvolutionDesc_t *convolution_desc);
+
+hcdnnStatus_t
+hcdnnSetConvolutionDescriptor(hcdnnConvolutionDesc_t convolution_desc,
+                              int pad_h,
+                              int pad_w,
+                              int u,
+                              int v,
+                              int upscale_x,
+                              int upscale_y);
+hcdnnStatus_t
+hcdnnDestroyConvolutionDescriptor(hcdnnConvolutionDesc_t convolution_desc);
+
+hcdnnStatus_t
+hcdnnCreateConvKernelDescriptor(hcdnnConvKernelDesc_t *kernel_desc);
+
+hcdnnStatus_t
+hcdnnSetConvKernelDescriptor(hcdnnConvKernelDesc_t kernel_desc,
+                             int k,
+                             int c,
+                             int h,
+                             int w,
+                             hcdnnDataType_t data_type);
+
+hcdnnStatus_t
+hcdnnDestroyConvKernelDescriptor(hcdnnConvKernelDesc_t kernel_desc);
+
+hcdnnStatus_t
+hcdnnConvolutionForward(const void *alpha
+                        const hcdnn4DTensorDesc_t x_desc,
+                        const void *x,
+                        const hcdnnConveKernelDesc_t w_desc,
+                        const void *w,
+                        const hcdnnConvolutionDesc_t conv_desc,
+                        const void *beta,
+                        const hcdnn4DTensorDesc_t y_desc,
+                        void *y);
 
 #endif // INCLUDE_HCDNN_H_
 
