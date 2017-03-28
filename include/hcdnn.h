@@ -41,7 +41,7 @@ typedef struct {
   hcdnnDataType_t data_type_;
 } hcdnn4DTensorStruct_t;
 
-typedef hcdnn4DTensorDesc_t hcdnn4DTensorStruct_t *;
+typedef hcdnn4DTensorStruct_t* hcdnn4DTensorDesc_t ;
 
 typedef struct {
   int pad_h_;
@@ -52,7 +52,7 @@ typedef struct {
   int upscale_y_;
 } hcdnnConvolutionStruct_t;
 
-typedef hcdnnConvolutionDesc_t hcdnnConvolutionStruct_t *;
+typedef hcdnnConvolutionStruct_t* hcdnnConvolutionDesc_t;
 
 typedef struct {
   int k_;
@@ -62,7 +62,7 @@ typedef struct {
   hcdnnDataType_t data_type_;
 } hcdnnConvKernelStruct_t;
 
-typedef hcdnnConvKernelDesc_t hcdnnConvKernelStruct_t *;
+typedef hcdnnConvKernelStruct_t* hcdnnConvKernelDesc_t;
 
 hcdnnStatus_t
 hcdnnCreate4DTensor(hcdnn4DTensorDesc_t *tensor_desc);
@@ -107,10 +107,10 @@ hcdnnStatus_t
 hcdnnDestroyConvKernelDescriptor(hcdnnConvKernelDesc_t kernel_desc);
 
 hcdnnStatus_t
-hcdnnConvolutionForward(const void *alpha
+hcdnnConvolutionForward(const void *alpha,
                         const hcdnn4DTensorDesc_t x_desc,
                         const void *x,
-                        const hcdnnConveKernelDesc_t w_desc,
+                        const hcdnnConvKernelDesc_t w_desc,
                         const void *w,
                         const hcdnnConvolutionDesc_t conv_desc,
                         const void *beta,

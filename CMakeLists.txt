@@ -21,7 +21,8 @@ set(LINKER_FLAGS "${LINKER_FLAGS} ${HCC_LINKER_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wno-reorder -pthread")
 add_definitions(-Wall -ansi -Wno-deprecated -pthread -std=c++11)
 
-set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR})
+set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/include)
+message(STATUS ${COMMON_INCLUDES})
 include_directories(${COMMON_INCLUDES}) 
 
 # Set source files
