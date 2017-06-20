@@ -116,6 +116,59 @@ hcdnnConvolutionForward(const void *alpha,
                         const void *beta,
                         const hcdnn4DTensorDesc_t y_desc,
                         void *y);
+//lrn
+typedef struct {
+	int K_;
+	int n_;
+	float alpha_;
+	float beta_;
+}hcdnnLRNStruct_t;
+
+typedef hcdnnLRNStruct_t* hcdnnLRNDesc_t;
+
+hcdnnStatus_t
+hcdnnCreateLRNDescriptor(hcdnnLRNDesc_t *pooling_desc); //pooling desc
+							
+hcdnnStatus_t
+hcdnnSetLRNDescriptor(hcdnnLRNDesc_t  lrn_desc,
+	unsigned		lrnN,
+	double			lrnAlpha,
+	double			lrnBeta,
+	double			lrnK);
+
+hcdnnStatus_t
+
+hcdnnGetLRNDescriptor(	hcdnnLRNDesc_t	lrn_desc,
+	unsigned		*lrnN,
+	double			*lrnAlpha,
+	double			*lrnBeta,
+	double			*lrnK);
+
+hcdnnStatus_t
+hcdnnDestroyLRNDescriptor(hcdnnLRNDesc_t	lrn_desc);
+
+hcdnnStatus_t
+hcdnnLRNForward(
+	hcdnnLRNDesc_t				lrn_desc,
+	const void					*alpha,
+	const hcdnn4DTensorDesc_t	x_desc,
+	const void					*x,
+	const void					*beta,
+	const hcdnn4DTensorDesc_t	y_desc,
+	void						*y);
+
+hcdnnStatus_t
+hcdnnLRNBackward(
+	hcdnnLRNDesc_t				lrn_desc,
+	const void					*alpha,
+	const hcdnn4DTensorDesc_t	y_desc,
+	const void					*y,
+	const hcdnn4DTensorDesc_t	dy_desc,
+	const void					*dy,
+	const hcdnn4DTensorDesc_t	x_desc,
+	const void					*x,
+	const void					*beta,
+	const hcdnn4DTensorDesc_t	dx_desc,
+	void						*dx);
 
 #endif // INCLUDE_HCDNN_H_
-
