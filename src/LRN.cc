@@ -24,8 +24,8 @@
 #include <hcc/hc.hpp>
 
 hcdnnStatus_t
-hcdnnCreateLRNDescriptor(hcdnnLRNDesc_t *pooling_desc) {
-	*pooling_desc = new hcdnnLRNStruct_t();
+hcdnnCreateLRNDescriptor(hcdnnLRNDesc_t *lrn_desc) {
+	*lrn_desc = new hcdnnLRNStruct_t();
 	return HCDNN_STATUS_SUCCESS;
 }
 
@@ -50,13 +50,13 @@ hcdnnDestroyLRNDescriptor(hcdnnLRNDesc_t lrn_desc) {
 
 hcdnnStatus_t
 hcdnnLRNForward(
-	hcdnnLRNDesc_t				lrn_desc,
-	const void					*alpha,
+	hcdnnLRNDesc_t			lrn_desc,
+	const void			*alpha,
 	const hcdnn4DTensorDesc_t	x_desc,
-	const void					*x,
-	const void					*beta,
+	const void			*x,
+	const void			*beta,
 	const hcdnn4DTensorDesc_t	y_desc,
-	void						*y) {
+	void				*y) {
 
 	//implementation
 	
